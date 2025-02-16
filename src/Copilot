@@ -1,0 +1,5 @@
+[eslint] 
+src\Pages\Home.jsx
+  Line 9:22:  Unexpected use of 'location'  no-restricted-globals
+
+Search for the keywords to learn more about each error.

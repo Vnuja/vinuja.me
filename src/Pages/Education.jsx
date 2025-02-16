@@ -57,12 +57,12 @@ const Education = () => {
         minHeight: '100vh',
       }}
     >
-      <Typography variant="h4" align="center" gutterBottom sx={{ color: '#ff4c4c', fontWeight: 'bold', marginBottom: 4 }}>
+      <Typography variant="h4" align="center" gutterBottom sx={{ color: '#c70039', fontWeight: 'bold', marginBottom: 4 }}>
         Education
       </Typography>
       <Grid container spacing={4} justifyContent="center">
         {educationData.map((edu, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4}>
+          <Grid item key={index} xs={12} sm={6} md={3.5}>
             <Card
               sx={{
                 border: '2px solid #c70039',
@@ -86,7 +86,7 @@ const Education = () => {
                 sx={{ borderTopLeftRadius: '12px', borderTopRightRadius: '12px' }}
               />
               <CardContent>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', color: '#ff4c4c' }}>
+                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', color: '#c70039' }}>
                   {edu.title}
                 </Typography>
                 <Typography variant="body1" sx={{ color: 'lightgray', fontSize: '15px' }}>

@@ -46,7 +46,8 @@ const TextRotator = () => {
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'left 910px bottom 0.5px',
-        }}>
+        }}>        
+
             <div style={{ textAlign: 'center', color: 'white', flex: '1' }}>
                 <div style={{ fontSize: '6em', fontWeight: 'bold' }}>
                     Vinuja <span style={{ color: '#c70039' }}>Ransith</span>
