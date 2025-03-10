@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Card, CardContent, Typography, Divider } from "@mui/material";
+import { Code, Build, Storage, Web, Settings, Work, Apps, Layers } from "@mui/icons-material";
 
 const skillCategories = {
   "Soft Skills": ["Communication", "Project Management", "Problem Solving", "Teamwork", "Time Management", "Leadership", "Critical Thinking", "Adaptability", "Creativity", "Decision Making"],
@@ -10,7 +11,19 @@ const skillCategories = {
   "Tools & Frameworks": ["Vite", "Figma", "Digital Marketing", "Web Applications"],
   "Office & Productivity": ["Microsoft Excel", "Google Sheets", "Google Docs", "Google Slides", "Microsoft Word", "Microsoft PowerPoint"],
   "Applications": [ "ClickUp", "Zoom", "Microsoft Teams"],
-  "Frameworks": ["React.js", "Next.js", "Express.js", "Vue.js", "Angular", "Spring Boot", "Laravel"]
+  "Frameworks": ["React.js", "TypeScript", "Express.js", "Node.js", "Material-UI", "Bootstrap", "Tailwind CSS"]
+};
+
+const categoryIcons = {
+  "Soft Skills": <Work />,
+  "Programming Languages": <Code />,
+  "Databases": <Storage />,
+  "Frontend Development": <Web />,
+  "Backend Development": <Build />,
+  "Tools & Frameworks": <Settings />,
+  "Office & Productivity": <Apps />,
+  "Applications": <Apps />,
+  "Frameworks": <Layers />
 };
 
 const Skills = () => {
@@ -22,16 +35,16 @@ const Skills = () => {
         </Typography>
         {Object.entries(skillCategories).map(([category, skills], index) => (
           <div key={index}>
-            <Typography variant="h6" sx={{ mt: 2, mb: 1, color: "#c70039" }}>
-              {category}
+            <Typography variant="h6" sx={{ mt: 2, mb: 1, color: "rgb(250, 202, 216)", display: "flex", alignItems: "center" }}>
+              {categoryIcons[category]}&nbsp;{category}
             </Typography>
-            <Divider sx={{ backgroundColor: "#c70039", mb: 2 }} />
+            <Divider sx={{ backgroundColor: " #c70039", mb: 2 }} />
             <Grid container spacing={2}>
               {skills.map((skill, skillIndex) => (
                 <Grid item xs={6} sm={3} key={skillIndex}>
-                  <Card sx={{ backgroundColor: "#292929", textAlign: "center", p: 1, borderRadius: 2 }}>
+                  <Card sx={{ backgroundColor: " #c70039", textAlign: "center", p: 1, borderRadius: 2 }}>
                     <CardContent>
-                      <Typography variant="body1">{skill}</Typography>
+                      <Typography variant="body1" sx={{ color: "rgb(255, 255, 255)" }}>{skill}</Typography>
                     </CardContent>
                   </Card>
                 </Grid>

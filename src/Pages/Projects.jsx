@@ -176,7 +176,7 @@ const Projects = () => {
                     <Button
                         key={category}
                         variant={selectedCategory === category ? 'contained' : 'outlined'}
-                        color="secondary"
+                        color="white"
                         onClick={() => setSelectedCategory(category)}
                         sx={{ fontWeight: 'bold', borderRadius: '20px' }}
                     >
@@ -191,7 +191,7 @@ const Projects = () => {
                     <Grid item key={index} xs={12} sm={6} md={3.5}>
                         <Card
                             sx={{
-                                border: '2px solid #c70039',
+                                border: '2px solid rgb(255, 255, 255)',
                                 borderRadius: '15px',
                                 backgroundColor: '#1e1e1e',
                                 color: 'white',

@@ -65,7 +65,7 @@ const Education = () => {
           <Grid item key={index} xs={12} sm={6} md={3.5}>
             <Card
               sx={{
-                border: '2px solid #c70039',
+                border: '2px solid rgb(255, 255, 255)',
                 borderRadius: '12px',
                 maxWidth: 400,
                 margin: 'auto',

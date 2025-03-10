@@ -22,10 +22,10 @@ const Contact = () => {
       <Container sx={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 4 }}>
         <Card sx={{ backgroundColor: "#1e1e1e", padding: 4, borderRadius: 3, maxWidth: 500, width: "100%" }}>
           <CardContent>
-            <Typography variant="h4" sx={{ color: "#ff4081", textAlign: "center", mb: 2 }}>
+            <Typography variant="h4" sx={{ color: " #ff4081", textAlign: "center", mb: 2 }}>
               Contact Me
             </Typography>
-            <Typography variant="body1" sx={{ textAlign: "center", mb: 3 }}>
+            <Typography variant="body1" sx={{ color: "rgb(255, 255, 255)",textAlign: "center", mb: 3 }}>
               Feel free to reach out for collaborations or just a friendly chat!
             </Typography>
 
