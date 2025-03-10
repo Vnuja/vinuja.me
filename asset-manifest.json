@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/vinuja.me/static/css/main.31d6cfe0.css",
+    "main.js": "/vinuja.me/static/js/main.e37462e8.js",
+    "static/js/488.9c92ff38.chunk.js": "/vinuja.me/static/js/488.9c92ff38.chunk.js",
+    "static/media/man.png": "/vinuja.me/static/media/man.8518ee650b02d5d8f829.png",
+    "static/media/Vinuja Ransith.pdf": "/vinuja.me/static/media/Vinuja Ransith.83944352b4c4b9447292.pdf",
+    "static/media/vinuja.jpg": "/vinuja.me/static/media/vinuja.8a7d596d880fe1fc4dd2.jpg",
+    "index.html": "/vinuja.me/index.html",
+    "main.e37462e8.js.map": "/vinuja.me/static/js/main.e37462e8.js.map",
+    "488.9c92ff38.chunk.js.map": "/vinuja.me/static/js/488.9c92ff38.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.e37462e8.js"
+  ]
+}
