@@ -1,6 +1,24 @@
 import React, { useState } from "react";
-import { Container, TextField, Button, Typography, Box, Card, CardContent } from "@mui/material";
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Card,
+  CardContent,
+  Avatar,
+  Divider,
+  IconButton,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material";
+import { GitHub, LinkedIn, Email, WhatsApp } from "@mui/icons-material";
 import Navbar from "../Components/Navbar";
+import vinuja1 from '../Images/vinuja.jpg';
+import { useTheme } from '@mui/material/styles';
+
+
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -14,86 +32,145 @@ const Contact = () => {
     console.log("Form Submitted:", form);
     // Handle form submission logic (API call, email sending, etc.)
   };
+  
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box sx={{ backgroundColor: "#121212", color: "white", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{
+        background: "linear-gradient(135deg, #1e1e1e 0%, #232526 100%)",
+        color: "white",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Navbar />
 
-      <Container sx={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 4 }}>
-        <Card sx={{ backgroundColor: "#1e1e1e", padding: 4, borderRadius: 3, maxWidth: 500, width: "100%" }}>
+      <Container
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          py: { xs: 2, md: 6 },
+        }}
+      >
+        <Card
+          elevation={8}
+          sx={{
+            background: "rgba(30,30,30,0.95)",
+            p: { xs: 2, md: 4 },
+            borderRadius: 4,
+            maxWidth: 500,
+            width: "100%",
+            boxShadow: "0 8px 32px 0 rgba(0,0,0,0.37)",
+            backdropFilter: "blur(6px)",
+          }}
+        >
           <CardContent>
-            <Typography variant="h4" sx={{ color: " #ff4081", textAlign: "center", mb: 2 }}>
-              Contact Me
-            </Typography>
-            <Typography variant="body1" sx={{ color: "rgb(255, 255, 255)",textAlign: "center", mb: 3 }}>
-              Feel free to reach out for collaborations or just a friendly chat!
-            </Typography>
-
-            {/* Contact Form */}
-            <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <TextField
-                label="Your Name"
-                variant="outlined"
-                fullWidth
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                sx={{ backgroundColor: "#292929", borderRadius: 1, input: { color: "white" }, label: { color: "white" } }}
-              />
-              <TextField
-                label="Your Email"
-                variant="outlined"
-                fullWidth
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                sx={{ backgroundColor: "#292929", borderRadius: 1, input: { color: "white" }, label: { color: "white" } }}
-              />
-              <TextField
-                label="Your Message"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                required
-                sx={{ backgroundColor: "#292929", borderRadius: 1, input: { color: "white" }, label: { color: "white" } }}
-              />
-
-              <Button
-                type="submit"
-                fullWidth
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 2 }}>
+              
+              <Typography variant="h4" sx={{ color: "#ff4081", fontWeight: 700, textAlign: "center" }}>
+                Contact Me
+              </Typography>
+              <Typography
+                variant="body1"
                 sx={{
-                  backgroundColor: "#c70039",
-                  color: "white",
-                  fontSize: "1.2rem",
-                  padding: 1.5,
-                  "&:hover": { backgroundColor: "#ff003c" },
+                  color: "rgb(220,220,220)",
+                  textAlign: "center",
+                  mt: 1,
+                  mb: 2,
+                  fontSize: "1.1rem",
                 }}
               >
-                Send Message
-              </Button>
+                Feel free to reach out for collaborations or just a friendly chat!
+              </Typography>
             </Box>
-          </CardContent>
-        </Card>
 
-        {/* Social Media Links */}
-        <Box sx={{ marginTop: 3, display: "flex", gap: 3 }}>
-          <Typography component="a" href="https://github.com/Vnuja" target="_blank" sx={{ color: "white", fontSize: "1.5rem", textDecoration: "none" }}>
-            🔗 GitHub
-          </Typography>
-          <Typography component="a" href="https://linkedin.com/in/vinuja" target="_blank" sx={{ color: "white", fontSize: "1.5rem", textDecoration: "none" }}>
-            🔗 LinkedIn
-          </Typography>
-          <Typography component="a" href="mailto:vinujaransith039@gmail.com" sx={{ color: "white", fontSize: "1.5rem", textDecoration: "none" }}>
-            📩 Email
-          </Typography>
-        </Box>
+            <Divider sx={{ mb: 3, background: "#ff4081" }} />
+
+            {/* Contact Form */}
+                  <Box
+                  sx={{
+                  mt: 4,
+                  display: "flex",
+                  gap: 4,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  }}
+                >
+                  <Tooltip title="GitHub" arrow>
+                  <IconButton
+                    component="a"
+                    href="https://github.com/Vnuja"
+                    target="_blank"
+                    sx={{
+                    color: "#fff",
+                    background: "#232323",
+                    "&:hover": { background: "#9900ffff", color: "#fff" },
+                    boxShadow: "0 2px 8px 0 #9900ffff",
+                    }}
+                    size="large"
+                  >
+                    <GitHub fontSize="inherit" />
+                  </IconButton>
+                  </Tooltip>
+                  <Tooltip title="LinkedIn" arrow>
+                  <IconButton
+                    component="a"
+                    href="https://linkedin.com/in/vinuja"
+                    target="_blank"
+                    sx={{
+                    color: "#0066ffff",
+                    background: "#232323",
+                    "&:hover": { background: "#ffffffff", color: "#0066ffff" },
+                    boxShadow: "0 2px 8px 0 #0066ffff",
+                    }}
+                    size="large"
+                  >
+                    <LinkedIn fontSize="inherit" />
+                  </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Email" arrow>
+                  <IconButton
+                    component="a"
+                    href="mailto:vinujaransith039@gmail.com"
+                    sx={{
+                    color: "#ff0000ff",
+                    background: "#232323",
+                    "&:hover": { background: "#ff0000ff", color: "#fff" },
+                    boxShadow: "0 2px 8px 0 #ff0000ff",
+                    }}
+                    size="large"
+                  >
+                    <Email fontSize="inherit" />
+                  </IconButton>
+                  </Tooltip>
+                  <Tooltip title="WhatsApp" arrow>
+                  <IconButton
+                    component="a"
+                    href="https://wa.me/94769451554"
+                    target="_blank"
+                    sx={{
+                    color: "#25D366",
+                    background: "#232323",
+                    "&:hover": { background: "#25D366", color: "#fff" },
+                    boxShadow: "0 2px 8px 0 #25D366",
+                    }}
+                    size="large"
+                  >
+                    <WhatsApp fontSize="inherit" />
+                  </IconButton>
+                  </Tooltip>
+                </Box>
+                  </CardContent>
+                </Card>
+
+                {/* Social Media Links */}
+        
       </Container>
     </Box>
   );

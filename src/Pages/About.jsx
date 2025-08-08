@@ -1,142 +1,156 @@
 import React from 'react';
 import vinuja1 from '../Images/vinuja.jpg';
 import { FaCode, FaMobileAlt, FaPencilRuler, FaObjectGroup } from "react-icons/fa";
-import { Container, Grid, Card, CardContent, Typography, Avatar, Box } from "@mui/material";
-
-function Data() {
-  return (
-    <div style={{ background: 'linear-gradient(to right,  #1a1a1a, #333333)' }}>
-      <Container
-        maxWidth="md"
-        sx={{
-          textAlign: 'center',
-          padding: '40px',
-          color: '#ffffff',
-          borderRadius: '10px',
-        }}
-      >
-        <Avatar
-          src={vinuja1}
-          alt="Vinuja"
-          sx={{
-            width: 200,
-            height: 200,
-            margin: '20px auto',
-            border: '3px solid #c70039',
-            transition: 'transform 0.3s ease-in-out',
-            '&:hover': { transform: 'scale(1.1)' },
-          }}
-        />
-        <Typography variant="h3" sx={{ color: '#c70039', fontWeight: 'bold' }}>
-          About Me
-        </Typography>
-        <Typography variant="body1" sx={{ fontSize: '1.2em', marginTop: '20px', color: '#cccccc' }}>
-          As an ambitious undergraduate student at <strong>SLIIT University</strong>, I am passionate about technology and digital innovation.
-          My academic journey is complemented by hands-on experience in <strong>marketing</strong> and <strong>social media design</strong>,
-          where I have honed my skills in a professional setting.
-        </Typography>
-
-        <Typography variant="h4" sx={{ color: '#c70039', marginTop: '30px', fontWeight: 'bold' }}>
-          Achievements
-        </Typography>
-        <Typography variant="body1" sx={{ fontSize: '1.1em', color: '#cccccc' }}>
-          ✅ Developed fully functional smart systems for homes, vehicles, and computers, integrating technology into everyday applications.
-        </Typography>
-
-        <Typography variant="h4" sx={{ color: '#c70039', marginTop: '30px', fontWeight: 'bold' }}>
-          Personal Interests
-        </Typography>
-        <Typography variant="body1" sx={{ fontSize: '1.2em', color: '#cccccc' }}>
-          Outside of academics, I am an avid <strong>gamer</strong>, <strong>content creator</strong>, and <strong>vlogger</strong>.
-          These hobbies fuel my creativity and keep me connected with the latest trends in digital media and technology.
-        </Typography>
-      </Container>
-      </div>
-  );
-}
+import {
+  Container, Grid, Card, CardContent, Typography,
+  Avatar, Box, useMediaQuery, Divider, Chip
+} from "@mui/material";
+import { useTheme } from '@mui/material/styles';
 
 const interests = [
   {
-    icon: <FaCode style={{ fontSize: '3rem', color: 'orange' }} />,
+    icon: <FaCode style={{ fontSize: '2.5rem', color: '#ff9800' }} />,
     title: "Web Engineering",
     skills: ["Frontend Design", "Backend Engineering", "Full-Stack"],
   },
   {
-    icon: <FaMobileAlt style={{ fontSize: '3rem', color: 'blue' }} />,
+    icon: <FaMobileAlt style={{ fontSize: '2.5rem', color: '#2196f3' }} />,
     title: "App Development",
     skills: ["Cross-Platform Apps", "Backend Integration", "Performance Tuning"],
   },
   {
-    icon: <FaObjectGroup style={{ fontSize: '3rem', color: 'green' }} />,
+    icon: <FaObjectGroup style={{ fontSize: '2.5rem', color: '#4caf50' }} />,
     title: "UI/UX Design",
     skills: ["Wireframing", "Prototyping", "User Research"],
   },
   {
-    icon: <FaPencilRuler style={{ fontSize: '3rem', color: 'yellow' }} />,
+    icon: <FaPencilRuler style={{ fontSize: '2.5rem', color: '#ffc107' }} />,
     title: "Graphic Designing",
     skills: ["Logo Design", "Branding", "Illustrations"],
   },
 ];
 
+const gradientBorder = {
+  border: '3px solid',
+  borderImage: 'linear-gradient(45deg, #c70039, #ff9800, #2196f3) 1',
+};
+
+const Data = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  return (
+    <Box sx={{ background: 'linear-gradient(120deg, #1a1a1a 60%, #2c2c2c 100%)', py: 7 }}>
+      <Container maxWidth="md" sx={{ textAlign: 'center', color: '#fff' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          
+          <Typography variant={isMobile ? "h4" : "h3"} sx={{ color: '#c70039', fontWeight: 'bold', letterSpacing: 2, marginTop: 5}}>
+            About Me
+          </Typography>
+          <Divider sx={{ my: 2, bgcolor: '#c70039', borderRadius: 2 }} />
+          <Typography variant="body1" sx={{ fontSize: '1.15em', mt: 2, color: '#cccccc', maxWidth: 600 }}>
+            I'm an ambitious undergraduate at <strong>SLIIT University</strong> with a strong passion for technology and innovation.
+            I also have hands-on experience in <strong>Videography</strong> and <strong>Graphic design</strong>.
+          </Typography>
+        </Box>
+
+        <Divider sx={{ my: 4, bgcolor: '#c70039', borderRadius: 2 }} />
+        <Chip label="Achievements" sx={{ bgcolor: '#c70039', color: '#fff', fontWeight: 'bold', mb: 2, fontSize: '1.1em' }} />
+        <Typography variant="body1" sx={{ fontSize: '1.08em', color: '#cccccc', mt: 1, maxWidth: 600, mx: 'auto' }}>
+          ✅ Developed smart systems for homes, vehicles, and computers — integrating tech into everyday applications.
+        </Typography>
+
+        <Divider sx={{ my: 4, bgcolor: '#c70039', borderRadius: 2 }} />
+        <Chip label="Personal Interests" sx={{ bgcolor: '#c70039', color: '#fff', fontWeight: 'bold', mb: 2, fontSize: '1.1em' }} />
+        <Typography variant="body1" sx={{ fontSize: '1.15em', color: '#cccccc', mt: 1, maxWidth: 600, mx: 'auto' }}>
+          Outside of academics, I enjoy <strong>gaming</strong>, <strong>content creation</strong>, and <strong>vlogging</strong> —
+          hobbies that fuel my creativity and keep me connected with digital media.
+        </Typography>
+      </Container>
+    </Box>
+  );
+};
+
 const Interests = () => {
   return (
-    <div style={{ background: 'linear-gradient(to right,  #1a1a1a, #333333)' }}>
-<Container
-      maxWidth="lg"
-      sx={{
-        color: 'white',
-        py: 5,
-        marginBottom: '20px',
-        borderRadius: '10px',
-      }}
-    >
-      <Typography variant="h3" sx={{ textAlign: 'center', color: '#c70039', fontWeight: 'bold', marginBottom: 4 }}>
-        Interests & Skills
-      </Typography>
-      <Grid container spacing={3} justifyContent="center">
-        {interests.map((interest, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card
-              sx={{
-                backgroundColor: '#1a1a1a',
-                textAlign: 'center',
-                padding: 3,
-                border: '3px solid #c70039',
-                borderRadius: 3,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-                '&:hover': {
-                  transform: 'scale(1.05)',
-                  boxShadow: '0px 0px 15px rgba(255, 76, 76, 0.5)',
-                },
-              }}
-            >
-              <CardContent>
-                {interest.icon}
-                <Typography variant="h5" sx={{ color: 'lightgreen', fontWeight: 'bold', mt: 2 }}>
-                  {interest.title}
-                </Typography>
-                <Typography variant="body2" sx={{ color: 'lightgray', mt: 1 }}>
-                  {interest.skills.map((skill, i) => (
-                    <div key={i}>⚡ {skill}</div>
-                  ))}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
-    </div>
+    <Box sx={{ background: 'linear-gradient(120deg, #1a1a1a 60%, #2c2c2c 100%)', py: 7 }}>
+      <Container maxWidth="lg">
+        <Typography
+          variant="h4"
+          sx={{
+            textAlign: 'center',
+            color: '#c70039',
+            fontWeight: 'bold',
+            mb: 4,
+            letterSpacing: 2,
+            textShadow: '0 2px 8px rgba(199,0,57,0.15)',
+          }}
+        >
+          Interests & Skills
+        </Typography>
+        <Grid container spacing={4} justifyContent="center">
+          {interests.map((interest, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <Card
+                sx={{
+                  background: 'linear-gradient(135deg, #232526 0%, #414345 100%)',
+                  border: '2px solid #c70039',
+                  borderRadius: 4,
+                  textAlign: 'center',
+                  height: '100%',
+                  boxShadow: '0 8px 32px 0 rgba(199,0,57,0.15)',
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  '&:hover': {
+                    transform: 'translateY(-8px) scale(1.03)',
+                    boxShadow: '0 16px 32px rgba(199,0,57,0.25)',
+                  },
+                }}
+              >
+                <CardContent>
+                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mb: 1 }}>
+                    {interest.icon}
+                  </Box>
+                  <Typography
+                    variant="h6"
+                    sx={{ color: '#ffffff', fontWeight: 'bold', mt: 2, letterSpacing: 1 }}
+                  >
+                    {interest.title}
+                  </Typography>
+                  <Divider sx={{ my: 1, bgcolor: '#c70039', borderRadius: 2 }} />
+                  <Box sx={{ mt: 1, color: 'lightgray' }}>
+                    {interest.skills.map((skill, i) => (
+                      <Chip
+                        key={i}
+                        label={`⚡ ${skill}`}
+                        size="small"
+                        sx={{
+                          bgcolor: '#232526',
+                          color: '#fff',
+                          fontWeight: 'bold',
+                          mr: 0.5,
+                          mb: 0.5,
+                          border: '1px solid #c70039',
+                        }}
+                      />
+                    ))}
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 
 const About = () => {
   return (
-    <Box sx={{ backgroundColor: '#0d0d0d', minHeight: '100vh', py: 5 }}>
+    <Box sx={{
+      backgroundColor: '#0d0d0d',
+      minHeight: '100vh',
+      fontFamily: 'Montserrat, Roboto, Arial, sans-serif',
+    }}>
       <Data />
       <Interests />
     </Box>

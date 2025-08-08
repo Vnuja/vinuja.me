@@ -27,7 +27,7 @@ const projectData = [
         type: 'MERN Stack WEB APP',
         category: 'Web',
         icon: 'pi pi-users',
-        link: 'https://github.com/user/employee-management',
+        link: 'https://github.com/Vnuja/CRYSTAL-ELEGANCE.git',
     },
     {
         title: 'A 3D Developer Portfolio',
@@ -126,6 +126,7 @@ const projectData = [
             'https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20154044.png?raw=true'
         ], type: 'Graphic Design',
         category: 'Graphic Design',
+        link: 'https://drive.google.com/drive/folders/18UEbIK24WqJhdhxYtKhBY0ZtGFOvRCAh?usp=sharing',
     },
     {
         title: 'Evoke.Outfits',
@@ -137,6 +138,7 @@ const projectData = [
         ],
         type: 'Graphic Design',
         category: 'Graphic Design',
+        link: 'https://drive.google.com/drive/folders/18UEbIK24WqJhdhxYtKhBY0ZtGFOvRCAh?usp=sharing',
     },
     {
         title: 'Vector Portraits',
@@ -148,6 +150,8 @@ const projectData = [
         ],
         type: 'Graphic Design',
         category: 'Graphic Design',
+        link: 'https://drive.google.com/drive/folders/18UEbIK24WqJhdhxYtKhBY0ZtGFOvRCAh?usp=sharing',
+
     },
 ];
 
@@ -178,7 +182,14 @@ const Projects = () => {
                         variant={selectedCategory === category ? 'contained' : 'outlined'}
                         color="white"
                         onClick={() => setSelectedCategory(category)}
-                        sx={{ fontWeight: 'bold', borderRadius: '20px' }}
+                        sx={{
+                            fontWeight: 'bold',
+                            borderRadius: '20px',
+                            boxShadow: selectedCategory === category ? '0 4px 16px #c70039' : 'none',
+                            background: selectedCategory === category ? 'linear-gradient(90deg,#c70039,#ff4081)' : undefined,
+                            color: selectedCategory === category ? '#fff' : '#c70039',
+                            borderColor: '#c70039',
+                        }}
                     >
                         {category}
                     </Button>
@@ -191,32 +202,62 @@ const Projects = () => {
                     <Grid item key={index} xs={12} sm={6} md={3.5}>
                         <Card
                             sx={{
-                                border: '2px solid rgb(255, 255, 255)',
-                                borderRadius: '15px',
-                                backgroundColor: '#1e1e1e',
+                                border: '2px solid #c70039',
+                                borderRadius: '18px',
+                                background: 'linear-gradient(135deg,#232526 0%,#414345 100%)',
                                 color: 'white',
                                 textAlign: 'center',
                                 cursor: 'pointer',
-                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                transition: 'transform 0.3s, box-shadow 0.3s',
+                                boxShadow: '0 2px 8px rgba(199,0,57,0.15)',
                                 '&:hover': {
-                                    transform: 'scale(1.05)',
-                                    boxShadow: '0 10px 20px rgba(255, 64, 129, 0.5)',
+                                    transform: 'scale(1.06)',
+                                    boxShadow: '0 10px 24px #c70039',
                                 },
                             }}
-                            onClick={() => setSelectedProject(project)}
+                            onClick={() => {
+                                setSelectedProject(project);
+                                setImageIndex(0);
+                            }}
                         >
-                            {/* Show first image if multiple exist */}
-                            <img
-                                src={project.images ? project.images[0] : project.image}
-                                alt={project.title}
-                                style={{ width: '100%', height: '200px', borderRadius: '10px 10px 0 0' }}
-                            />
+                            <Box sx={{ position: 'relative' }}></Box>
+                                <img
+                                    src={project.images ? project.images[0] : project.image}
+                                    alt={project.title}
+                                    style={{
+                                        width: '100%',
+                                        height: '200px',
+                                        objectFit: 'cover',
+                                        borderRadius: '16px 16px 0 0',
+                                        boxShadow: '0 2px 8px #c70039',
+                                        transition: 'filter 0.3s',
+                                        filter: 'brightness(0.95) contrast(1.1)',
+                                    }}
+                                />
+                                {/* Overlay for type/category */}
+                                <Box sx={{
+                                    position: 'absolute',
+                                    top: 10,
+                                    left: 10,
+                                    background: 'rgba(199,0,57,0.85)',
+                                    color: '#fff',
+                                    px: 1.5,
+                                    py: 0.5,
+                                    borderRadius: '12px',
+                                    fontSize: '0.85rem',
+                                    fontWeight: 'bold',
+                                    letterSpacing: '0.5px',
+                                    boxShadow: '0 2px 8px #c70039',
+                                }}>
+                                    {project.type}
+                                </Box>
                             <CardContent>
-                                <Typography variant="h6" sx={{ fontWeight: 'bold', marginTop: 2 }}>
+                                <Typography variant="h6" sx={{ fontWeight: 'bold', marginTop: 2, color: '#ff4081', textShadow: '0 2px 8px #c70039' }}>
                                     {project.title}
                                 </Typography>
-                                <Typography variant="body2" color="gray">
-                                    {project.type}
+                                <Typography variant="body2" color="gray" sx={{ minHeight: 40 }}>
+                                    {project.description?.slice(0, 60) || project.type}
+                                    {project.description && project.description.length > 60 ? '...' : ''}
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -232,29 +273,32 @@ const Projects = () => {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        backgroundColor: '#1e1e1e',
-                        padding: '20px',
-                        borderRadius: '10px',
-                        width: '90%',
-                        maxWidth: '600px',
-                        boxShadow: 24,
+                        background: 'linear-gradient(135deg,#232526 0%,#414345 100%)',
+                        padding: '32px 24px',
+                        borderRadius: '18px',
+                        width: '95%',
+                        maxWidth: '650px',
+                        boxShadow: '0 8px 32px #c70039',
                         textAlign: 'center',
+                        color: '#fff',
                     }}
                 >
                     {selectedProject && (
                         <>
                             {selectedProject.images ? (
-                                <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+                                <Box sx={{ position: 'relative', overflow: 'hidden', mb: 2 }}>
                                     <img
                                         src={selectedProject.images[imageIndex]}
                                         alt={`Design ${imageIndex}`}
                                         style={{
                                             width: '100%',
-                                            borderRadius: '10px',
-                                            transition: 'opacity 0.5s ease-in-out',
+                                            borderRadius: '14px',
+                                            transition: 'opacity 0.5s',
+                                            boxShadow: '0 2px 16px #c70039',
+                                            objectFit: 'cover',
+                                            maxHeight: '340px',
                                         }}
                                     />
-
                                     {/* Navigation Buttons */}
                                     <Button
                                         sx={{
@@ -262,11 +306,14 @@ const Projects = () => {
                                             top: '50%',
                                             left: 10,
                                             transform: 'translateY(-50%)',
-                                            backgroundColor: 'rgba(0,0,0,0.5)',
+                                            backgroundColor: 'rgba(199,0,57,0.7)',
                                             color: 'white',
                                             borderRadius: '50%',
                                             minWidth: '40px',
                                             height: '40px',
+                                            fontSize: '1.5rem',
+                                            zIndex: 2,
+                                            boxShadow: '0 2px 8px #c70039',
                                         }}
                                         onClick={() =>
                                             setImageIndex((prev) =>
@@ -282,11 +329,14 @@ const Projects = () => {
                                             top: '50%',
                                             right: 10,
                                             transform: 'translateY(-50%)',
-                                            backgroundColor: 'rgba(0,0,0,0.5)',
+                                            backgroundColor: 'rgba(199,0,57,0.7)',
                                             color: 'white',
                                             borderRadius: '50%',
                                             minWidth: '40px',
                                             height: '40px',
+                                            fontSize: '1.5rem',
+                                            zIndex: 2,
+                                            boxShadow: '0 2px 8px #c70039',
                                         }}
                                         onClick={() =>
                                             setImageIndex((prev) =>
@@ -296,28 +346,74 @@ const Projects = () => {
                                     >
                                         ›
                                     </Button>
+                                    {/* Image index dots */}
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
+                                        {selectedProject.images.map((_, idx) => (
+                                            <Box
+                                                key={idx}
+                                                sx={{
+                                                    width: 10,
+                                                    height: 10,
+                                                    borderRadius: '50%',
+                                                    background: idx === imageIndex ? '#c70039' : '#fff',
+                                                    opacity: idx === imageIndex ? 1 : 0.5,
+                                                    mx: 0.5,
+                                                    transition: 'background 0.3s',
+                                                    border: '1px solid #c70039',
+                                                }}
+                                            />
+                                        ))}
+                                    </Box>
                                 </Box>
                             ) : (
                                 <img
                                     src={selectedProject.image}
                                     alt={selectedProject.title}
-                                    style={{ width: '100%', borderRadius: '10px' }}
+                                    style={{
+                                        width: '100%',
+                                        borderRadius: '14px',
+                                        boxShadow: '0 2px 16px #c70039',
+                                        objectFit: 'cover',
+                                        maxHeight: '340px',
+                                        marginBottom: '16px',
+                                    }}
                                 />
                             )}
 
-                            <Typography variant="h5" sx={{ fontWeight: 'bold', marginTop: 2, color: '#ff4081' }}>
+                            <Typography variant="h5" sx={{ fontWeight: 'bold', marginTop: 2, color: '#ff4081', textShadow: '0 2px 8px #c70039' }}>
                                 {selectedProject.title}
                             </Typography>
                             <Typography variant="body1" color="gray" sx={{ marginY: 2 }}>
                                 {selectedProject.description}
                             </Typography>
-                            <Typography variant="body2" color="gray">
-                                Type: {selectedProject.type}
+                            <Typography variant="body2" color="gray" sx={{ mb: 2 }}>
+                                Type: <span style={{ color: '#c70039', fontWeight: 'bold' }}>{selectedProject.type}</span>
                             </Typography>
 
                             <Button
+                                variant="contained"
+                                sx={{
+                                    marginTop: 2,
+                                    background: 'linear-gradient(90deg,#c70039,#ff4081)',
+                                    color: '#fff',
+                                    fontWeight: 'bold',
+                                    borderRadius: '20px',
+                                    boxShadow: '0 2px 8px #c70039',
+                                    mr: 2,
+                                }}
+                                onClick={() => window.open(selectedProject.link, '_blank')}
+                            >
+                                {selectedProject.category === 'Graphic Design' ? 'View Designs' : 'View Project'}
+                            </Button>
+                            <Button
                                 variant="outlined"
-                                sx={{ marginTop: 2 }}
+                                sx={{
+                                    marginTop: 2,
+                                    borderRadius: '20px',
+                                    borderColor: '#c70039',
+                                    color: '#c70039',
+                                    fontWeight: 'bold',
+                                }}
                                 onClick={() => setSelectedProject(null)}
                             >
                                 Close
@@ -326,7 +422,6 @@ const Projects = () => {
                     )}
                 </Box>
             </Modal>
-
         </Box>
     );
 };

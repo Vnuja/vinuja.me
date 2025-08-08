@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaGithub, FaYoutube, FaTiktok, FaWhatsapp } from 'react-icons/fa';
+import { Link, Box } from "@mui/material";
 import cv from '../Files/Vinuja Ransith.pdf';
 import vinuja from '../Images/man.png';
 
@@ -46,7 +47,7 @@ const TextRotator = () => {
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'left 910px bottom 0.5px',
-        }}>        
+        }}>
 
             <div style={{ textAlign: 'center', color: 'white', flex: '1' }}>
                 <div style={{ fontSize: '6em', fontWeight: 'bold' }}>
@@ -56,7 +57,7 @@ const TextRotator = () => {
                     I'm a <span style={{ color: '#c70039' }}>{displayText}</span>
                     <span style={{ animation: 'blink 1s infinite' }}>|</span>
                 </div>
-                <div style={{ marginTop: '20px' }}>
+                <div style={{ marginTop: '50px' }}>
                     <a href={cv} download style={{
                         backgroundColor: '#c70039',
                         color: 'white',
@@ -66,6 +67,10 @@ const TextRotator = () => {
                         cursor: 'pointer',
                         textDecoration: 'none'
                     }}>Download CV</a>
+                    <div style={{ marginTop: '60px' }}>
+                        <SocialMediaList />
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -85,28 +90,62 @@ const SocialMediaList = () => {
     ];
 
     return (
-        <div style={{
-            position: 'fixed',
-            left: '20px',
-            top: '55%',
-            transform: 'translateY(-50%)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-        }}>
-            {socialMedia.map((item, index) => (
-                <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'white', fontSize: '1.5em' }}>
-                    {item.icon}
-                </a>
-            ))}
-        </div>
+        <>
+            {/* Desktop view: vertical on the left */}
+            <div className="social-desktop">
+                {socialMedia.map((item, index) => (
+                    <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'white', fontSize: '1.5em' }}>
+                        {item.icon}
+                    </a>
+                ))}
+            </div>
+
+            {/* Mobile view: horizontal under CV */}
+            <div className="social-mobile">
+                {socialMedia.map((item, index) => (
+                    <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'white', fontSize: '1.5em' }}>
+                        {item.icon}
+                    </a>
+                ))}
+            </div>
+
+            {/* Styles */}
+            <style>{`
+                .social-desktop {
+                    position: fixed;
+                    left: 20px;
+                    top: 55%;
+                    transform: translateY(-50%);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                .social-mobile {
+                    display: none;
+                    justify-content: center;
+                    gap: 15px;
+                    margin-top: 20px;
+                    flex-wrap: wrap;
+                }
+
+                @media (max-width: 768px) {
+                    .social-desktop {
+                        display: none;
+                    }
+
+                    .social-mobile {
+                        display: flex;
+                    }
+                }
+            `}</style>
+        </>
     );
 };
 
 const Home = () => {
     return (
         <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-            <SocialMediaList />
             <TextRotator />
         </div>
     );

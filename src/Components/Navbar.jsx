@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useLocation } from "react-router-dom";
 
@@ -12,7 +12,6 @@ const navItems = [
   { name: "Skills", path: "/skills" },
   { name: "Resume", path: "/resume" },
   { name: "Contact", path: "/contact" },
-
 ];
 
 const Navbar = () => {
@@ -29,16 +28,43 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ backgroundColor: "#101010", width: "100%" }}>
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "bold", color: "#fff" }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "#101010",
+          px: { xs: 1, sm: 2, md: 4 },
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            minHeight: { xs: 56, sm: 64, md: 72 },
+          }}
+        >
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              fontWeight: "bold",
+              color: "#fff",
+              fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
+            }}
+          >
             <Link to="https://vinuja.me" style={{ textDecoration: 'none', color: '#fff' }}>
               vinuja.me
             </Link>
           </Typography>
 
-          {/* Desktop Menu */}
-          <div className="desktop-menu" style={{ display: "flex", gap: "10px" }}>
+          {/* Desktop Menu - Fixed with Box component */}
+          <Box
+            sx={{
+              display: { xs: 'none', md: 'flex' }, // Hide on xs, show on md and above
+              gap: { md: '16px', lg: '24px' },
+              alignItems: 'center',
+            }}
+          >
             {navItems.map((item) => (
               <Button
                 key={item.name}
@@ -48,12 +74,17 @@ const Navbar = () => {
                 sx={{
                   fontWeight: isActive(item.path) ? "bold" : "normal",
                   borderBottom: isActive(item.path) ? "2px solid #fff" : "none",
+                  fontSize: { md: "1rem" },
+                  px: { md: 2 },
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  },
                 }}
               >
                 {item.name}
               </Button>
             ))}
-          </div>
+          </Box>
 
           {/* Mobile Menu Button */}
           <IconButton
@@ -61,9 +92,12 @@ const Navbar = () => {
             color="inherit"
             aria-label="menu"
             onClick={handleDrawerToggle}
-            sx={{ display: { sm: "none" } }}
+            sx={{
+              display: { xs: "block", md: "none" },
+              ml: 1,
+            }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ fontSize: { xs: "1.5rem", sm: "1.75rem" } }} />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -73,9 +107,17 @@ const Navbar = () => {
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
-        sx={{ "& .MuiDrawer-paper": { width: 250 } }}
+        sx={{
+          '& .MuiDrawer-paper': {
+            width: { xs: "70%", sm: 300 },
+            maxWidth: "100%",
+            backgroundColor: "#101010",
+            color: "#fff",
+            pt: 2,
+          },
+        }}
       >
-        <List>
+        <List sx={{ px: 2 }}>
           {navItems.map((item) => (
             <ListItem
               button
@@ -84,10 +126,23 @@ const Navbar = () => {
               to={item.path}
               onClick={handleDrawerToggle}
               sx={{
-                backgroundColor: isActive(item.path) ? "#555" : "inherit",
+                borderRadius: 1,
+                mb: 0.5,
+                backgroundColor: isActive(item.path) ? "rgba(255, 255, 255, 0.1)" : "inherit",
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                },
               }}
             >
-              <ListItemText primary={item.name} sx={{ color: isActive(item.path) ? "#fff" : "inherit" }} />
+              <ListItemText
+                primary={item.name}
+                sx={{
+                  color: isActive(item.path) ? "#fff" : "rgba(255, 255, 255, 0.7)",
+                  '& .MuiTypography-root': {
+                    fontSize: { xs: "1rem", sm: "1.1rem" },
+                  },
+                }}
+              />
             </ListItem>
           ))}
         </List>
