@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaGithub, FaYoutube, FaTiktok, FaWhatsapp } from 'react-icons/fa';
-import { Link, Box } from "@mui/material";
 import cv from '../Files/Vinuja Ransith.pdf';
 import vinuja from '../Images/man.png';
 

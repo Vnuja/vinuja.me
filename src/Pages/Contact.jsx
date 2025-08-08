@@ -1,41 +1,19 @@
-import React, { useState } from "react";
 import {
   Container,
-  TextField,
-  Button,
   Typography,
   Box,
   Card,
   CardContent,
-  Avatar,
   Divider,
   IconButton,
   Tooltip,
-  useMediaQuery,
 } from "@mui/material";
 import { GitHub, LinkedIn, Email, WhatsApp } from "@mui/icons-material";
 import Navbar from "../Components/Navbar";
-import vinuja1 from '../Images/vinuja.jpg';
-import { useTheme } from '@mui/material/styles';
 
 
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted:", form);
-    // Handle form submission logic (API call, email sending, etc.)
-  };
-  
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
     <Box
       sx={{

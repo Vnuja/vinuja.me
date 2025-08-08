@@ -1,9 +1,8 @@
 import React from 'react';
-import vinuja1 from '../Images/vinuja.jpg';
 import { FaCode, FaMobileAlt, FaPencilRuler, FaObjectGroup } from "react-icons/fa";
 import {
   Container, Grid, Card, CardContent, Typography,
-  Avatar, Box, useMediaQuery, Divider, Chip
+   Box, useMediaQuery, Divider, Chip
 } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 
@@ -29,11 +28,6 @@ const interests = [
     skills: ["Logo Design", "Branding", "Illustrations"],
   },
 ];
-
-const gradientBorder = {
-  border: '3px solid',
-  borderImage: 'linear-gradient(45deg, #c70039, #ff9800, #2196f3) 1',
-};
 
 const Data = () => {
   const theme = useTheme();
