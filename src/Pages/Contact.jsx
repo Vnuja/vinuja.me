@@ -99,7 +99,7 @@ const Contact = () => {
                   <Tooltip title="LinkedIn" arrow>
                   <IconButton
                     component="a"
-                    href="https://linkedin.com/in/vinuja"
+                    href="https://linkedin.com/in/vnuja"
                     target="_blank"
                     sx={{
                     color: "#0066ffff",
