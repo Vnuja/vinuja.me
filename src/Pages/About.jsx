@@ -1,154 +1,241 @@
-import React from 'react';
-import { FaCode, FaMobileAlt, FaPencilRuler, FaObjectGroup } from "react-icons/fa";
+import React, { useMemo } from "react";
 import {
-  Container, Grid, Card, CardContent, Typography,
-   Box, useMediaQuery, Divider, Chip
+  Box,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Stack,
+  Divider,
+  Chip,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import { useTheme } from '@mui/material/styles';
+import { FaCode, FaMobileAlt, FaPencilRuler, FaObjectGroup } from "react-icons/fa";
 
-const interests = [
-  {
-    icon: <FaCode style={{ fontSize: '2.5rem', color: '#ff9800' }} />,
-    title: "Web Engineering",
-    skills: ["Frontend Design", "Backend Engineering", "Full-Stack"],
-  },
-  {
-    icon: <FaMobileAlt style={{ fontSize: '2.5rem', color: '#2196f3' }} />,
-    title: "App Development",
-    skills: ["Cross-Platform Apps", "Backend Integration", "Performance Tuning"],
-  },
-  {
-    icon: <FaObjectGroup style={{ fontSize: '2.5rem', color: '#4caf50' }} />,
-    title: "UI/UX Design",
-    skills: ["Wireframing", "Prototyping", "User Research"],
-  },
-  {
-    icon: <FaPencilRuler style={{ fontSize: '2.5rem', color: '#ffc107' }} />,
-    title: "Graphic Designing",
-    skills: ["Logo Design", "Branding", "Illustrations"],
-  },
-];
+/* ------- data ------- */
+const useInterests = () =>
+  useMemo(
+    () => [
+      {
+        icon: <FaCode />,
+        color: "#ff9800",
+        title: "Web Development",
+        skills: ["Frontend Design", "Backend Engineering", "Full-Stack"],
+      },
+      {
+        icon: <FaMobileAlt />,
+        color: "#2196f3",
+        title: "App Development",
+        skills: ["Cross-Platform Apps", "Backend Integration", "Performance Tuning"],
+      },
+      {
+        icon: <FaObjectGroup />,
+        color: "#4caf50",
+        title: "UI/UX Design",
+        skills: ["Wireframing", "Prototyping", "User Research"],
+      },
+      {
+        icon: <FaPencilRuler />,
+        color: "#ffc107",
+        title: "Graphic Designing",
+        skills: ["Logo Design", "Branding", "Illustrations"],
+      },
+    ],
+    []
+  );
 
-const Data = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+/* ------- shared section header ------- */
+function SectionHeader({ label, sub, center = false }) {
+  return (
+    <Stack alignItems={center ? "center" : "flex-start"} sx={{ textAlign: center ? "center" : "left" }}>
+      <Typography
+        variant="h3"
+        sx={{
+          fontWeight: 800,
+          letterSpacing: 1,
+          color: "#c70039",
+          mb: 0.75,
+          fontSize: { xs: "1.8rem", sm: "2rem", md: "2.2rem" },
+        }}
+      >
+        {label}
+      </Typography>
+      <Divider sx={{ width: 64, height: 3, bgcolor: "#c70039", borderRadius: 2, mb: 1.5 }} />
+      {sub ? (
+        <Typography sx={{ color: "rgba(255,255,255,0.75)", maxWidth: 720, fontSize: { xs: "0.98rem", md: "1.05rem" } }}>
+          {sub}
+        </Typography>
+      ) : null}
+    </Stack>
+  );
+}
+
+/* ------- interest card ------- */
+function InterestCard({ item }) {
+  return (
+    <Card
+      sx={{
+        height: "100%",
+        background: "linear-gradient(135deg, #232526 0%, #3a3d40 100%)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: 3,
+        boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+        transition: "transform .25s ease, box-shadow .25s ease",
+        "&:hover": { transform: "translateY(-6px)", boxShadow: "0 18px 40px rgba(199,0,57,0.18)" },
+      }}
+    >
+      <CardContent>
+        <Stack alignItems="center" spacing={1}>
+          <Box
+            aria-hidden
+            sx={{
+              display: "grid",
+              placeItems: "center",
+              width: 56,
+              height: 56,
+              borderRadius: "14px",
+              background: "rgba(255,255,255,0.06)",
+              color: item.color,
+              fontSize: 28,
+            }}
+          >
+            {item.icon}
+          </Box>
+
+          <Typography variant="h6" sx={{ color: "#fff", fontWeight: 700, mt: 1 }}>
+            {item.title}
+          </Typography>
+          <Divider sx={{ width: 32, my: 1, bgcolor: "#c70039", borderRadius: 2 }} />
+
+          <Stack direction="row" flexWrap="wrap" justifyContent="center" spacing={0.75} useFlexGap sx={{ mt: 0.5 }}>
+            {item.skills.map((s, i) => (
+              <Chip
+                key={i}
+                label={s}
+                size="small"
+                sx={{
+                  bgcolor: "#2b2e31",
+                  color: "#fff",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  fontWeight: 600,
+                }}
+              />
+            ))}
+          </Stack>
+        </Stack>
+      </CardContent>
+    </Card>
+  );
+}
+
+/* =================== DESKTOP =================== */
+function DesktopAbout() {
+  const interests = useInterests();
 
   return (
-    <Box sx={{ background: 'linear-gradient(120deg, #1a1a1a 60%, #2c2c2c 100%)', py: 7 }}>
-      <Container maxWidth="md" sx={{ textAlign: 'center', color: '#fff' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          
-          <Typography variant={isMobile ? "h4" : "h3"} sx={{ color: '#c70039', fontWeight: 'bold', letterSpacing: 2, marginTop: 5}}>
-            About Me
+    <Box sx={{ background: "linear-gradient(120deg,#121212 0%,#1a1a1a 60%,#202020 100%)", minHeight: "100vh", color: "#fff" }}>
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        {/* About Me */}
+        <SectionHeader
+          label="About Me"
+          sub={
+            <>
+              I’m an ambitious undergraduate at <strong>SLIIT</strong> with a passion for building clean, performant
+              software. I also have hands-on experience in <strong>Videography</strong> and <strong>Graphic Design</strong>.
+            </>
+          }
+        />
+
+        <Stack spacing={1.5} sx={{ mt: 3, color: "#ccc", maxWidth: 900 }}>
+          <Divider sx={{ bgcolor: "#c70039", borderRadius: 2, opacity: 0.7 }} />
+          <Chip label="Achievements" sx={{ bgcolor: "#c70039", color: "#fff", fontWeight: 700, width: "fit-content" }} />
+          <Typography sx={{ fontSize: "1.05rem" }}>
+            ✅ Built smart systems for homes, vehicles, and computers — integrating technology into everyday life.
           </Typography>
-          <Divider sx={{ my: 2, bgcolor: '#c70039', borderRadius: 2 }} />
-          <Typography variant="body1" sx={{ fontSize: '1.15em', mt: 2, color: '#cccccc', maxWidth: 600 }}>
-            I'm an ambitious undergraduate at <strong>SLIIT University</strong> with a strong passion for technology and innovation.
-            I also have hands-on experience in <strong>Videography</strong> and <strong>Graphic design</strong>.
-          </Typography>
+        </Stack>
+
+        {/* Interests & Skills */}
+        <Box sx={{ mt: 6 }}>
+          <SectionHeader label="Interests & Skills" center />
+          <Grid container spacing={3} sx={{ mt: 1 }}>
+            {interests.map((it, idx) => (
+              <Grid key={idx} item xs={12} sm={6} md={3}>
+                <InterestCard item={it} />
+              </Grid>
+            ))}
+          </Grid>
         </Box>
 
-        <Divider sx={{ my: 4, bgcolor: '#c70039', borderRadius: 2 }} />
-        <Chip label="Achievements" sx={{ bgcolor: '#c70039', color: '#fff', fontWeight: 'bold', mb: 2, fontSize: '1.1em' }} />
-        <Typography variant="body1" sx={{ fontSize: '1.08em', color: '#cccccc', mt: 1, maxWidth: 600, mx: 'auto' }}>
-          ✅ Developed smart systems for homes, vehicles, and computers — integrating tech into everyday applications.
-        </Typography>
-
-        <Divider sx={{ my: 4, bgcolor: '#c70039', borderRadius: 2 }} />
-        <Chip label="Personal Interests" sx={{ bgcolor: '#c70039', color: '#fff', fontWeight: 'bold', mb: 2, fontSize: '1.1em' }} />
-        <Typography variant="body1" sx={{ fontSize: '1.15em', color: '#cccccc', mt: 1, maxWidth: 600, mx: 'auto' }}>
-          Outside of academics, I enjoy <strong>gaming</strong>, <strong>content creation</strong>, and <strong>vlogging</strong> —
-          hobbies that fuel my creativity and keep me connected with digital media.
-        </Typography>
+        {/* Personal Interests */}
+        <Stack spacing={1.5} sx={{ mt: 6, color: "#ccc", maxWidth: 900 }}>
+          <Divider sx={{ bgcolor: "#c70039", borderRadius: 2, opacity: 0.7 }} />
+          <Chip label="Personal Interests" sx={{ bgcolor: "#c70039", color: "#fff", fontWeight: 700, width: "fit-content" }} />
+          <Typography sx={{ fontSize: "1.05rem" }}>
+            Outside academics I enjoy <strong>gaming</strong>, <strong>content creation</strong>, and <strong>vlogging</strong> —
+            hobbies that fuel creativity and keep me close to digital media.
+          </Typography>
+        </Stack>
       </Container>
     </Box>
   );
-};
+}
 
-const Interests = () => {
+/* =================== MOBILE =================== */
+function MobileAbout() {
+  const interests = useInterests();
+
   return (
-    <Box sx={{ background: 'linear-gradient(120deg, #1a1a1a 60%, #2c2c2c 100%)', py: 7 }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h4"
-          sx={{
-            textAlign: 'center',
-            color: '#c70039',
-            fontWeight: 'bold',
-            mb: 4,
-            letterSpacing: 2,
-            textShadow: '0 2px 8px rgba(199,0,57,0.15)',
-          }}
-        >
-          Interests & Skills
-        </Typography>
-        <Grid container spacing={4} justifyContent="center">
-          {interests.map((interest, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card
-                sx={{
-                  background: 'linear-gradient(135deg, #232526 0%, #414345 100%)',
-                  border: '2px solid #c70039',
-                  borderRadius: 4,
-                  textAlign: 'center',
-                  height: '100%',
-                  boxShadow: '0 8px 32px 0 rgba(199,0,57,0.15)',
-                  transition: 'transform 0.3s, box-shadow 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-8px) scale(1.03)',
-                    boxShadow: '0 16px 32px rgba(199,0,57,0.25)',
-                  },
-                }}
-              >
-                <CardContent>
-                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mb: 1 }}>
-                    {interest.icon}
-                  </Box>
-                  <Typography
-                    variant="h6"
-                    sx={{ color: '#ffffff', fontWeight: 'bold', mt: 2, letterSpacing: 1 }}
-                  >
-                    {interest.title}
-                  </Typography>
-                  <Divider sx={{ my: 1, bgcolor: '#c70039', borderRadius: 2 }} />
-                  <Box sx={{ mt: 1, color: 'lightgray' }}>
-                    {interest.skills.map((skill, i) => (
-                      <Chip
-                        key={i}
-                        label={`⚡ ${skill}`}
-                        size="small"
-                        sx={{
-                          bgcolor: '#232526',
-                          color: '#fff',
-                          fontWeight: 'bold',
-                          mr: 0.5,
-                          mb: 0.5,
-                          border: '1px solid #c70039',
-                        }}
-                      />
-                    ))}
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+    <Box sx={{ background: "linear-gradient(180deg,#121212 0%,#191919 100%)", minHeight: "100vh", color: "#fff" }}>
+      <Container maxWidth="md" sx={{ py: 6 }}>
+        {/* About Me */}
+        <SectionHeader
+          label="About Me"
+          sub={
+            <>
+              I’m an ambitious undergraduate at <strong>SLIIT</strong> with a passion for building clean, performant
+              software. I also have hands-on experience in <strong>Videography</strong> and <strong>Graphic Design</strong>.
+            </>
+          }
+        />
+
+        <Stack spacing={1.25} sx={{ mt: 2.5, color: "#ccc" }}>
+          <Divider sx={{ bgcolor: "#c70039", borderRadius: 2, opacity: 0.7 }} />
+          <Chip label="Achievements" sx={{ bgcolor: "#c70039", color: "#fff", fontWeight: 700, alignSelf: "flex-start" }} />
+          <Typography sx={{ fontSize: "1.02rem" }}>
+            ✅ Built smart systems for homes, vehicles, and computers — integrating technology into everyday life.
+          </Typography>
+        </Stack>
+
+        {/* Interests grid (2 per row on phones) */}
+        <Box sx={{ mt: 5 }}>
+          <SectionHeader label="Interests & Skills" center />
+          <Grid container spacing={2.5} sx={{ mt: 0.5 }}>
+            {interests.map((it, idx) => (
+              <Grid key={idx} item xs={6}>
+                <InterestCard item={it} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        {/* Personal Interests */}
+        <Stack spacing={1.25} sx={{ mt: 5, color: "#ccc" }}>
+          <Divider sx={{ bgcolor: "#c70039", borderRadius: 2, opacity: 0.7 }} />
+          <Chip label="Personal Interests" sx={{ bgcolor: "#c70039", color: "#fff", fontWeight: 700, alignSelf: "flex-start" }} />
+          <Typography sx={{ fontSize: "1.02rem" }}>
+            Outside academics I enjoy <strong>gaming</strong>, <strong>content creation</strong>, and <strong>vlogging</strong>.
+          </Typography>
+        </Stack>
       </Container>
     </Box>
   );
-};
+}
 
-const About = () => {
-  return (
-    <Box sx={{
-      backgroundColor: '#0d0d0d',
-      minHeight: '100vh',
-      fontFamily: 'Montserrat, Roboto, Arial, sans-serif',
-    }}>
-      <Data />
-      <Interests />
-    </Box>
-  );
-};
-
-export default About;
+/* ------- main export: split renders ------- */
+export default function About() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  return isMobile ? <MobileAbout /> : <DesktopAbout />;
+}

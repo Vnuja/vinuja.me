@@ -1,8 +1,21 @@
-import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, Box } from "@mui/material";
+import React, { useState, useCallback } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Box,
+  Divider,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, Link as RouterLink } from "react-router-dom";
 
+/** central nav config (edit here) */
 const navItems = [
   { name: "Home", path: "/home" },
   { name: "About", path: "/about" },
@@ -11,90 +24,158 @@ const navItems = [
   { name: "Projects", path: "/projects" },
   { name: "Skills", path: "/skills" },
   { name: "Resume", path: "/resume" },
-  { name: "Contact", path: "/contact" },
 ];
 
-const Navbar = () => {
+/** helper: underline for active link */
+const activeStyles = {
+  fontWeight: 700,
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    left: 0,
+    bottom: -6,
+    width: "100%",
+    height: 2,
+    bgcolor: "primary.contrastText",
+    opacity: 0.9,
+  },
+};
+
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const handleDrawerToggle = useCallback(() => {
+    setMobileOpen((v) => !v);
+  }, []);
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const closeDrawerAndNavigate = useCallback(() => {
+    setMobileOpen(false);
+  }, []);
 
   return (
     <>
+      {/* Skip link for keyboard users */}
+      <Box
+        component="a"
+        href="#main-content"
+        sx={{
+          position: "fixed",
+          left: 16,
+          top: -40,
+          zIndex: (t) => t.zIndex.appBar + 1,
+          px: 2,
+          py: 1,
+          borderRadius: 1,
+          bgcolor: "primary.main",
+          color: "primary.contrastText",
+          boxShadow: 2,
+          transition: "top .2s",
+          "&:focus-visible": { top: 16 },
+        }}
+      >
+        Skip to content
+      </Box>
+
       <AppBar
         position="fixed"
+        elevation={0}
         sx={{
-          backgroundColor: "#101010",
-          px: { xs: 1, sm: 2, md: 4 },
+          backdropFilter: "saturate(140%) blur(12px)",
+          backgroundColor: "rgba(16,16,16,0.7)",
+          borderBottom: "1px solid",
+          borderColor: "divider",
         }}
       >
         <Toolbar
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
             minHeight: { xs: 56, sm: 64, md: 72 },
+            px: { xs: 1.5, sm: 3, md: 4 },
+            display: "flex",
+            gap: 2,
           }}
         >
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              fontWeight: "bold",
-              color: "#fff",
-              fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
-            }}
-          >
-            <Link to="https://vinuja.me" style={{ textDecoration: 'none', color: '#fff' }}>
-              vinuja.me
-            </Link>
-          </Typography>
+          {/* Brand */}
+          <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 800,
+                letterSpacing: 0.4,
+                color: "primary.contrastText",
+                fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
+                "& a": { color: "inherit", textDecoration: "none" },
+                "&:hover": { opacity: 0.9 },
+              }}
+            >
+              <a href="https://vinuja.me" rel="noopener noreferrer">
+                vinuja.me
+              </a>
+            </Typography>
+          </Box>
 
-          {/* Desktop Menu - Fixed with Box component */}
+          {/* Desktop nav */}
           <Box
+            component="nav"
+            aria-label="primary"
             sx={{
-              display: { xs: 'none', md: 'flex' }, // Hide on xs, show on md and above
-              gap: { md: '16px', lg: '24px' },
-              alignItems: 'center',
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+              gap: { md: 1, lg: 1.5 },
             }}
           >
             {navItems.map((item) => (
               <Button
                 key={item.name}
-                color="inherit"
-                component={Link}
+                component={NavLink}
                 to={item.path}
-                sx={{
-                  fontWeight: isActive(item.path) ? "bold" : "normal",
-                  borderBottom: isActive(item.path) ? "2px solid #fff" : "none",
-                  fontSize: { md: "1rem" },
-                  px: { md: 2 },
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  },
-                }}
+                end
+                sx={({ isActive }) => ({
+                  position: "relative",
+                  color: "primary.contrastText",
+                  px: 1.5,
+                  py: 1,
+                  borderRadius: 1.5,
+                  fontWeight: isActive ? 700 : 500,
+                  textTransform: "none",
+                  "&:hover": { bgcolor: "rgba(255,255,255,0.08)" },
+                  ...(isActive ? activeStyles : {}),
+                })}
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
               >
                 {item.name}
               </Button>
             ))}
+
+            {/* CTA (optional, tweak as you like) */}
+            <Button
+              component={RouterLink}
+              to="/contact"
+              sx={{
+                ml: { md: 0.5, lg: 1 },
+                textTransform: "none",
+                borderRadius: 2,
+                px: 2,
+                py: 1,
+                fontWeight: 700,
+                bgcolor: "primary.contrastText",
+                color: "primary.main",
+                "&:hover": { opacity: 0.9, bgcolor: "primary.contrastText" },
+              }}
+            >
+              Hire Me
+            </Button>
           </Box>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile menu button */}
           <IconButton
             edge="end"
             color="inherit"
-            aria-label="menu"
+            aria-label="Open navigation menu"
             onClick={handleDrawerToggle}
             sx={{
-              display: { xs: "block", md: "none" },
-              ml: 1,
+              display: { xs: "inline-flex", md: "none" },
+              ml: 0.5,
+              "&:focus-visible": { outline: "2px solid rgba(255,255,255,.7)" },
             }}
           >
             <MenuIcon sx={{ fontSize: { xs: "1.5rem", sm: "1.75rem" } }} />
@@ -102,53 +183,90 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
+      {/* Spacer so content isn't hidden under fixed AppBar */}
+      <Toolbar sx={{ minHeight: { xs: 56, sm: 64, md: 72 } }} />
+
       {/* Mobile Drawer */}
       <Drawer
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
+        keepMounted
+        ModalProps={{ keepMounted: true }}
         sx={{
-          '& .MuiDrawer-paper': {
-            width: { xs: "70%", sm: 300 },
-            maxWidth: "100%",
-            backgroundColor: "#101010",
+          "& .MuiDrawer-paper": {
+            width: { xs: "78%", sm: 320 },
+            bgcolor: "#101010",
             color: "#fff",
-            pt: 2,
+            pt: 1,
           },
         }}
       >
-        <List sx={{ px: 2 }}>
-          {navItems.map((item) => (
-            <ListItem
-              button
-              key={item.name}
-              component={Link}
-              to={item.path}
-              onClick={handleDrawerToggle}
+        <Box
+          role="presentation"
+          sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+        >
+          <Box sx={{ px: 2, py: 1.5 }}>
+            <Typography sx={{ fontWeight: 800, letterSpacing: 0.4 }}>
+              Menu
+            </Typography>
+          </Box>
+          <Divider sx={{ borderColor: "rgba(255,255,255,0.08)" }} />
+
+          <List sx={{ px: 1 }}>
+            {navItems.map((item) => (
+              <ListItemButton
+                key={item.name}
+                component={NavLink}
+                to={item.path}
+                end
+                onClick={closeDrawerAndNavigate}
+                sx={({ isActive }) => ({
+                  borderRadius: 1.5,
+                  mb: 0.5,
+                  px: 1.25,
+                  py: 1.25,
+                  ...(isActive
+                    ? { bgcolor: "rgba(255,255,255,0.10)" }
+                    : { "&:hover": { bgcolor: "rgba(255,255,255,0.08)" } }),
+                })}
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
+              >
+                <ListItemText
+                  primary={item.name}
+                  primaryTypographyProps={{
+                    sx: {
+                      fontWeight: 600,
+                      fontSize: { xs: "1rem", sm: "1.05rem" },
+                      color: "inherit",
+                    },
+                  }}
+                />
+              </ListItemButton>
+            ))}
+          </List>
+
+          <Box sx={{ mt: "auto", p: 2 }}>
+            <Button
+              fullWidth
+              component={RouterLink}
+              to="/contact"
+              onClick={closeDrawerAndNavigate}
               sx={{
-                borderRadius: 1,
-                mb: 0.5,
-                backgroundColor: isActive(item.path) ? "rgba(255, 255, 255, 0.1)" : "inherit",
-                '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                },
+                textTransform: "none",
+                borderRadius: 2,
+                py: 1.25,
+                fontWeight: 700,
+                bgcolor: "primary.contrastText",
+                color: "primary.main",
+                "&:hover": { opacity: 0.95, bgcolor: "primary.contrastText" },
               }}
             >
-              <ListItemText
-                primary={item.name}
-                sx={{
-                  color: isActive(item.path) ? "#fff" : "rgba(255, 255, 255, 0.7)",
-                  '& .MuiTypography-root': {
-                    fontSize: { xs: "1rem", sm: "1.1rem" },
-                  },
-                }}
-              />
-            </ListItem>
-          ))}
-        </List>
+              Hire Me
+            </Button>
+          </Box>
+        </Box>
       </Drawer>
     </>
   );
-};
-
-export default Navbar;
+}
