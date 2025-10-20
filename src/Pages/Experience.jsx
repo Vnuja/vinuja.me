@@ -28,11 +28,11 @@ const ExperienceData = [
     company: "iPLAY.LK, Remote",
     duration: "2022",
   },
-  {
+ /* {
     title: "IT Assistant",
     company: "New City Food Corner, Colombo 10",
     duration: "2018 - Present",
-  },
+  },*/
   {
     image: "https://preview.redd.it/kwapabdycdx81.jpg?width=720&format=pjpg&auto=webp&s=a3f804eae30ec1ba1b75820970eeb1e858b403d5",
     title: "Social Media Designer",

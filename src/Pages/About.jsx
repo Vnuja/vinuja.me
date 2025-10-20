@@ -12,7 +12,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { FaCode, FaMobileAlt, FaPencilRuler, FaObjectGroup } from "react-icons/fa";
+import { FaCode, FaMobileAlt, FaPencilRuler, FaObjectGroup, FaBrain, FaGlobeAmericas, FaCarBattery   } from "react-icons/fa";
+import { IoGameController, IoTerminal  } from "react-icons/io5";
+import { BiSolidCctv } from "react-icons/bi";
+import { MdElectricalServices } from "react-icons/md";
 
 /* ------- data ------- */
 const useInterests = () =>
@@ -20,28 +23,105 @@ const useInterests = () =>
     () => [
       {
         icon: <FaCode />,
-        color: "#ff9800",
+        color: "#c70039",
+        title: "IT Support Troubleshooting",
+        skills: [
+          "Hardware Diagnostics",
+          "OS & Software Support",
+          "Network Troubleshooting",
+          "Remote Assistance & Tools"
+        ],
+      },{
+        icon: <FaGlobeAmericas  />,
+        color: "#c70039",
         title: "Web Development",
         skills: ["Frontend Design", "Backend Engineering", "Full-Stack"],
       },
       {
         icon: <FaMobileAlt />,
-        color: "#2196f3",
+        color: "#c70039",
         title: "App Development",
         skills: ["Cross-Platform Apps", "Backend Integration", "Performance Tuning"],
       },
       {
         icon: <FaObjectGroup />,
-        color: "#4caf50",
+        color: "#c70039",
         title: "UI/UX Design",
         skills: ["Wireframing", "Prototyping", "User Research"],
       },
       {
         icon: <FaPencilRuler />,
-        color: "#ffc107",
+        color: "#c70039",
         title: "Graphic Designing",
         skills: ["Logo Design", "Branding", "Illustrations"],
       },
+      {
+        icon: <IoTerminal  />,
+        color: "#c70039",
+        title: "IoT Development",
+        skills: ["Embedded Systems", "Sensor Integration", "MQTT & Cloud"],
+      },
+      {
+        icon: <FaObjectGroup />,
+        color: "#c70039",
+        title: "System Development",
+        skills: ["System Architecture", "Microservices", "Scalability & Reliability"],
+      },
+      {
+        icon: <FaBrain />,
+        color: "#c70039",
+        title: "AI Integration",
+        skills: ["Model Deployment", "MLOps", "NLP & Computer Vision"],
+      },
+      {
+        icon: <FaPencilRuler />,
+        color: "#c70039",
+        title: "Automation",
+        skills: ["CI/CD Pipelines", "Scripting & Orchestration", "RPA & Workflow Automation"],
+      },
+      {
+        icon: <FaPencilRuler />,
+        color: "#c70039",
+        title: "Content Creation",
+        skills: [
+          "Video Production",
+          "Photography",
+          "Editing & Post-Production",
+          "Podcasting",
+          "Social Media Strategy",
+        ],
+      },
+      {
+        icon: <IoGameController />,
+        color: "#c70039",
+        title: "Gaming & Game Development",
+        skills: [
+          "Game Design",
+          "Unity / Unreal Engine",
+          "Gameplay Programming",
+          "Level & System Design",
+          "Multiplayer & Networking",
+        ],
+      },
+      {
+        icon: <BiSolidCctv />,
+        color: "#c70039",
+        title: "CCTV Installation",
+        skills: ["Camera Selection & Placement", "Wiring & Power", "NVR/DVR Setup", "Remote Monitoring"],
+      },
+      {
+        icon: <MdElectricalServices  />,
+        color: "#c70039",
+        title: "Household Wiring",
+        skills: ["Circuit Design", "Switches & Sockets", "Safety & Earthing", "Load Balancing"],
+      },
+      {
+        icon: <FaCarBattery  />,
+        color: "#c70039",
+        title: "Auto Electrical",
+        skills: ["Vehicle Wiring & Harnesses", "ECU & Sensor Integration"],
+      },
+      
     ],
     []
   );
@@ -84,9 +164,13 @@ function InterestCard({ item }) {
         boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
         transition: "transform .25s ease, box-shadow .25s ease",
         "&:hover": { transform: "translateY(-6px)", boxShadow: "0 18px 40px rgba(199,0,57,0.18)" },
+        mx: "auto", // center horizontally in the grid cell
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center", // center vertically within the card
       }}
     >
-      <CardContent>
+      <CardContent sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
         <Stack alignItems="center" spacing={1}>
           <Box
             aria-hidden
@@ -104,7 +188,7 @@ function InterestCard({ item }) {
             {item.icon}
           </Box>
 
-          <Typography variant="h6" sx={{ color: "#fff", fontWeight: 700, mt: 1 }}>
+          <Typography variant="h6" sx={{ color: "#fff", fontWeight: 700, mt: 1, textAlign: "center" }}>
             {item.title}
           </Typography>
           <Divider sx={{ width: 32, my: 1, bgcolor: "#c70039", borderRadius: 2 }} />
@@ -148,13 +232,14 @@ function DesktopAbout() {
           }
         />
 
-        <Stack spacing={1.5} sx={{ mt: 3, color: "#ccc", maxWidth: 900 }}>
+        
+        {/* <Stack spacing={1.5} sx={{ mt: 3, color: "#ccc", maxWidth: 900 }}>
           <Divider sx={{ bgcolor: "#c70039", borderRadius: 2, opacity: 0.7 }} />
           <Chip label="Achievements" sx={{ bgcolor: "#c70039", color: "#fff", fontWeight: 700, width: "fit-content" }} />
           <Typography sx={{ fontSize: "1.05rem" }}>
             ✅ Built smart systems for homes, vehicles, and computers — integrating technology into everyday life.
           </Typography>
-        </Stack>
+        </Stack> */}
 
         {/* Interests & Skills */}
         <Box sx={{ mt: 6 }}>
@@ -200,13 +285,13 @@ function MobileAbout() {
           }
         />
 
-        <Stack spacing={1.25} sx={{ mt: 2.5, color: "#ccc" }}>
+        {/* <Stack spacing={1.5} sx={{ mt: 3, color: "#ccc", maxWidth: 900 }}>
           <Divider sx={{ bgcolor: "#c70039", borderRadius: 2, opacity: 0.7 }} />
-          <Chip label="Achievements" sx={{ bgcolor: "#c70039", color: "#fff", fontWeight: 700, alignSelf: "flex-start" }} />
-          <Typography sx={{ fontSize: "1.02rem" }}>
+          <Chip label="Achievements" sx={{ bgcolor: "#c70039", color: "#fff", fontWeight: 700, width: "fit-content" }} />
+          <Typography sx={{ fontSize: "1.05rem" }}>
             ✅ Built smart systems for homes, vehicles, and computers — integrating technology into everyday life.
           </Typography>
-        </Stack>
+        </Stack> */}
 
         {/* Interests grid (2 per row on phones) */}
         <Box sx={{ mt: 5 }}>

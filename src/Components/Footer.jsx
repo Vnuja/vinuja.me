@@ -260,7 +260,7 @@ function MobileFooter() {
           {/* Bottom strip */}
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.7)" }}>
-              © {year} Vinuja.me — React & MUI
+              © {year} Vinuja.me — Crafted Using React & MUI By Me!
             </Typography>
             <IconButton
               aria-label="Back to top"
