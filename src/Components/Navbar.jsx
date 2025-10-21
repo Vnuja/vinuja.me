@@ -53,35 +53,13 @@ export default function Navbar() {
   }, []);
 
   return (
-    <>
-      {/* Skip link for keyboard users */}
-      <Box
-        component="a"
-        href="#main-content"
-        sx={{
-          position: "fixed",
-          left: 16,
-          top: -40,
-          zIndex: (t) => t.zIndex.appBar + 1,
-          px: 2,
-          py: 1,
-          borderRadius: 1,
-          bgcolor: "primary.main",
-          color: "primary.contrastText",
-          boxShadow: 2,
-          transition: "top .2s",
-          "&:focus-visible": { top: 16 },
-        }}
-      >
-        Skip to content
-      </Box>
-
+    <>      
       <AppBar
         position="fixed"
         elevation={0}
         sx={{
           backdropFilter: "saturate(140%) blur(12px)",
-          backgroundColor: "rgba(16,16,16,0.7)",
+          backgroundColor: "rgba(0,0,0,0)",
           borderBottom: "1px solid",
           borderColor: "divider",
         }}
@@ -157,9 +135,9 @@ export default function Navbar() {
                 px: 2,
                 py: 1,
                 fontWeight: 700,
-                bgcolor: "primary.contrastText",
-                color: "primary.main",
-                "&:hover": { opacity: 0.9, bgcolor: "primary.contrastText" },
+                bgcolor: "#c7003970",
+                color: '#ffffffff',
+                "&:hover": { opacity: 0.9, bgcolor: "#c70039" },
               }}
             >
               Hire Me
