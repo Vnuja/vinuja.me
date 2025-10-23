@@ -235,9 +235,9 @@ export default function Navbar() {
                 borderRadius: 2,
                 py: 1.25,
                 fontWeight: 700,
-                bgcolor: "primary.contrastText",
-                color: "primary.main",
-                "&:hover": { opacity: 0.95, bgcolor: "primary.contrastText" },
+                bgcolor: "#c7003970",
+                color: '#ffffffff',
+                "&:hover": { opacity: 0.9, bgcolor: "#c70039" },
               }}
             >
               Hire Me
