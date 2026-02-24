@@ -4,6 +4,6 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  // Custom domain serves from root, so use "/"
-  base: "/"
+  // GitHub Pages serves from subpath /vinuja.me/
+  base: "/vinuja.me/"
 });
