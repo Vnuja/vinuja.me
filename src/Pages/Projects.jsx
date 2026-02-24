@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useProjects } from "../admin/useProjects";
 import {
   Box,
   Container,
@@ -23,31 +24,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-/* ---------------- data (yours) ---------------- */
-const projectData = [
 
-  { title: "HMA Voyages", description: "The Official Website for HMAVoyages Sri Lanka", image: "https://raw.githubusercontent.com/Vnuja/vinuja.me/refs/heads/main/src/Images/HMAV.jpg", type: "React APP", category: "Web", link: "https://hmavoyages.com" },
-  { title: "Vinuja Ransith", description: "The Personal Portfolio of Vinuja Ransith", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20130952.png?raw=true", type: "React APP", category: "Web", link: "https://github.com/Vnuja/vinuja.me.git" },
-  { title: "SKY LIGHT CINEMA", description: "A full-stack React app for movie ticket booking with seat selection and payment integration.", image: "https://tcnbandara.me/assets/img/project/mo.jpg", type: "MERN Stack WEB APP", category: "Web", link: "https://github.com/Vnuja/SKY-LIGHT-CINEMA.git" },
-  { title: "CRYSTAL ELEGANCE", description: "Gem and Jewelary Management System web application developed using the MERN (MongoDB, Express.js, React, Node.js) stack..", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Blue%20Gray%20Modern%20Jewellery%20Facebook%20Ad.png?raw=true", type: "MERN Stack WEB APP", category: "Web", link: "https://github.com/Vnuja/CRYSTAL-ELEGANCE.git" },
-  { title: "A 3D Developer Portfolio", description: "A 3D Portfolio fort me ", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20124439.png?raw=true", type: "THREE.js", category: "Web", link: "https://github.com/Vnuja/3D-Portfolio.git" },
-  { title: "Sweet Shop", description: "A web application for managing a sweet shop, including inventory management, order processing, and customer management.", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20125746.png?raw=true", type: "MERN Stack WEB APP", category: "Web", link: "https://github.com/Vnuja/SweetShop.git" },
-  { title: "Construction Supply Management System", description: "A web application for managing a Supply, including inventory management, order processing, and order management.", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20132852.png?raw=true", type: "MERN Stack WEB APP", category: "Web", link: "https://github.com/Vnuja/cms.git" },
-  { title: "HMA Voyages", description: "The Official Website for HMAVoyages Sri Lanka", image: "https://raw.githubusercontent.com/Vnuja/vinuja.me/refs/heads/main/src/Images/HMAV.jpg", type: "UI/UX Design", category: "UI/UX", link: "https://hmavoyages.com" },
-
-  { title: "Vinuja Ransith", description: "The Personal Portfolio of Vinuja Ransith", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20130952.png?raw=true", type: "UI/UX Design", category: "UI/UX", link: "https://vinuja.me" },
-  { title: "Cypher Car Care", description: "A Mobile application for car care center, including user management,  Service catoulog, and vehicle management.", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20154044.png?raw=true", type: "UI/UX Design", category: "UI/UX", link: "https://www.figma.com/design/KVsdYiag0KgVNsacnpbHEk/Cypher-Car-Care-App?m=auto&t=IEpIuoCRUz7mKTSK-6" },
-  { title: "Construction Supply Management System", description: "A web application for managing a Supply, including inventory management, order processing, and order management.", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20132852.png?raw=true", type: "UI/UX Design", category: "UI/UX", link: "https://www.figma.com/design/Wg4f0gaqJm2UyWmSNIF9jv/supplier-ui?node-id=0-1" },
-  { title: "Lucky-Car-Rental", description: "A Mobile application for rent a car, including user management, rental processing, and vehicle management.", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20152912.png?raw=true", type: "UI/UX Design", category: "UI/UX", link: "https://www.figma.com/design/Rdxx0EannVdb9hqDngkOUM/Lucky-Car-Rental?m=auto&t=IEpIuoCRUz7mKTSK-6" },
-
-  { title: "Cypher Car Care", description: "A Mobile application for car care center, including user management,  Service catoulog, and vehicle management.", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20154044.png?raw=true", type: "Kotlin - Androide Applications", category: "Mobile", link: "https://github.com/Vnuja/Cypher-Car-Care.git" },
-  { title: "Quick Ticks", description: "Perfect app to brigthen your daily mood with organized work load and tasks.", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20160413.png?raw=true", type: "Kotlin - Androide Applications", category: "Mobile", link: "https://github.com/Vnuja/QuickTicks.git" },
-  { title: "Lucky-Car-Rental", description: "A Mobile application for rent a car, including user management, rental processing, and vehicle management.", image: "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20152912.png?raw=true", type: "Kotlin - Androide Applications", category: "Mobile", link: "https://github.com/Vnuja/Lucky-Car-Rental.git" },
-
-  { title: "Logo Designes", images: ["https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20152912.png?raw=true", "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/Screenshot%202025-02-12%20154044.png?raw=true"], type: "Graphic Design", category: "Graphic Design", link: "https://drive.google.com/drive/folders/18UEbIK24WqJhdhxYtKhBY0ZtGFOvRCAh?usp=sharing" },
-  { title: "Evoke.Outfits", images: ["https://github.com/Vnuja/vinuja.me/blob/main/src/Images/1.jpg?raw=true", "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/2.jpg?raw=true", "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/3.jpg?raw=true"], type: "Graphic Design", category: "Graphic Design", link: "https://drive.google.com/drive/folders/18UEbIK24WqJhdhxYtKhBY0ZtGFOvRCAh?usp=sharing" },
-  { title: "Vector Portraits", images: ["https://github.com/Vnuja/vinuja.me/blob/main/src/Images/d.jpg?raw=true", "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/2.jpg?raw=true", "https://github.com/Vnuja/vinuja.me/blob/main/src/Images/3.jpg?raw=true"], type: "Graphic Design", category: "Graphic Design", link: "https://drive.google.com/drive/folders/18UEbIK24WqJhdhxYtKhBY0ZtGFOvRCAh?usp=sharing" },
-];
 
 const categories = ["All", "Web", "Mobile", "UI/UX", "Graphic Design"];
 
@@ -366,7 +343,7 @@ function MobileProjects({ filtered, onSelect, selectedCategory, setSelectedCateg
 export default function Projects() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
+  const { projects: projectData } = useProjects();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
 

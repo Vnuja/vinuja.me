@@ -10,6 +10,7 @@ import Projects from "./Pages/Projects";
 import Skills from "./Pages/Skills";
 import Resume from "./Pages/Resume";
 import Contact from "./Pages/Contact";
+import Admin from "./Pages/Admin";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/skills" element={<Skills />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </div>
       </Router>
