@@ -14,7 +14,7 @@ import Contact from "./Pages/Contact";
 const App = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <Router>
+      <Router basename="/vinuja.me">
         <Navbar />
         <div style={{ flex: 1 }}>
           <Routes>
